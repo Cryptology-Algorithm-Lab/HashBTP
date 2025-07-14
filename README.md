@@ -1,4 +1,4 @@
-### General Security Analysis for Face Template Protection Methods from Cryptogrpahic Hash Functions
+### General Security Analysis for Face Template Protection Methods from Cryptographic Hash Functions
 
 - Seunghun Paik, Minsu Kim, Sunpill Kim, and Jae Hong Seo
 
@@ -46,7 +46,7 @@ HashBTP
 
 - CVLFace: https://github.com/mk-minchul/CVLface
 
-In addition, we also used the official implmenetations of other recent FR models with pre-trained parameters.
+In addition, we also used the official implementations of other recent FR models with pre-trained parameters.
 
 - UniTSFace: https://github.com/CVI-SZU/UniTSFace 
 
@@ -54,20 +54,20 @@ In addition, we also used the official implmenetations of other recent FR models
 
 - Face-Transformer: https://github.com/zhongyy/Face-Transformer
 
-The codes for loading these backbones are provided in the inside of `backbone`. You can check details at `backbone/__init__.py`. For the detailed settings about each FR model, e.g., architecture, loss function, or train dataset, please refer to `Table 1` of our paper.
+The codes for loading these backbones are provided inside `backbone`. You can check details at `backbone/__init__.py`. For the detailed settings about each FR model, e.g., architecture, loss function, or train dataset, please refer to `Table 1` of our paper. We also provide the Google Drive link that contains all the parameters used in our paper: https://drive.google.com/file/d/1pYLZas2NgGMglW71QSSLOpIaO_inR-WA/view?usp=sharing
 
-2. You also need to download face benchmark datasets (LFW, CFP-FP, and AgeDB). You can obtain them by downloading them from their official websites, or downloading one of the training datasets provided by InsightFace:
+2. You also need to download face benchmark datasets (LFW, CFP-FP, and AgeDB). You can obtain them by downloading them from their official websites or by downloading one of the training datasets provided by InsightFace:
 
 - https://github.com/deepinsight/insightface/tree/master/recognition/_datasets_
 
-3. Now you can reproduce our experimental results by following instructions in `1. Upper TAR.ipynb`.
+3. Now you can reproduce our experimental results by following the instructions in `1. Upper TAR.ipynb`.
 
 
 #### 2. Reproducing Results for Security Estimator
 
 1. The target BTPs are implemented in `BTPs.py`, and the proposed security estimator is provided in `estimator.py`.
 
-2. You can run our estimator on these BTPs by following instructions in `2. Estimator.ipynb`.
+2. You can run our estimator on these BTPs by following the instructions in `2. Estimator.ipynb`.
 
 
 #### Enjoy!
