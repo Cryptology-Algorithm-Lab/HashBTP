@@ -16,17 +16,17 @@ All the required libraries are in `dependencies.yml`, such as PyTorch, SciPy, an
 
 #### Structure of the Codebase
 
-The overall structure of our codebase is as follows: (To be written.)
+The overall structure of our codebase is as follows:
 
 ```
 HashBTP
 ├──backbones
     ├── __init__.py
-    ├── custom_layers.py              # Implementation of SLL; Forked from https://github.com/araujoalexandre/lipschitz-sll-networks.
-    ├── iresnet.py                    # Forked from https://github.com/deepinsight/insightface    
-    ├── iresnet_AT.py                 # Due to compatibility issue; Forked from https://github.com/ShawnXYang/Face-Robustness-Benchmark
-    ├── toyexamples.py                # Networks for toy examples on our analysis.
-    └── sllnet.py   
+    ├── iresnet.py                  # Forked from https://github.com/deepinsight/insightface    
+    ├── iresnet_magface.py          # Due to compatibility issue; Forked from https://github.com/IrvingMeng/MagFace/blob/main/models/iresnet.py
+    ├── mobilefacenet.py            # Forked from https://github.com/deepinsight/insightface/blob/master/recognition/arcface_torch/backbones/mobilefacenet.py
+    ├── sfnet.py                    # Forked from https://github.com/ydwen/opensphere/blob/main/opensphere/module/backbone/sfnet.py
+    └── vit.py                      # Forked from https://github.com/zhongyy/Face-Transformer/blob/main/copy-to-vit_pytorch-path/vits_face.py
 ├── config.py                       # Configs for loading pre-trained FR models.
 ├── BTPs.py                         # Implemnetation of face BTPs, including IronMask (CVPR'21) and Mohan et al. (CVPRW'19)
 ├── estimator.py                    # Implementation of the proposed security estimator.
