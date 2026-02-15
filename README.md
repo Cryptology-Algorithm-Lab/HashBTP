@@ -21,6 +21,8 @@ The overall structure of our codebase is as follows:
 ```
 HashBTP
 ├──backbones
+    ├── CVLFace                     # Forked From https://github.com/mk-minchul/CVLface/tree/main/cvlface/research/recognition/code/run_v1/models
+        ├── /* CVLFace Models */                     
     ├── __init__.py
     ├── iresnet.py                  # Forked from https://github.com/deepinsight/insightface    
     ├── iresnet_magface.py          # Due to compatibility issue; Forked from https://github.com/IrvingMeng/MagFace/blob/main/models/iresnet.py
