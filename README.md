@@ -21,21 +21,22 @@ The overall structure of our codebase is as follows:
 ```
 HashBTP
 ├──backbones
-    ├── CVLFace                     # Forked From https://github.com/mk-minchul/CVLface/tree/main/cvlface/research/recognition/code/run_v1/models
+    ├── CVLFace                         # Forked From https://github.com/mk-minchul/CVLface/tree/main/cvlface/research/recognition/code/run_v1/models
         ├── /* CVLFace Models */                     
     ├── __init__.py
-    ├── iresnet.py                  # Forked from https://github.com/deepinsight/insightface    
-    ├── iresnet_magface.py          # Due to compatibility issue; Forked from https://github.com/IrvingMeng/MagFace/blob/main/models/iresnet.py
-    ├── mobilefacenet.py            # Forked from https://github.com/deepinsight/insightface/blob/master/recognition/arcface_torch/backbones/mobilefacenet.py
-    ├── sfnet.py                    # Forked from https://github.com/ydwen/opensphere/blob/main/opensphere/module/backbone/sfnet.py
-    └── vit.py                      # Forked from https://github.com/zhongyy/Face-Transformer/blob/main/copy-to-vit_pytorch-path/vits_face.py
-├── config.py                       # Configs for loading pre-trained FR models.
-├── BTPs.py                         # Implemnetation of face BTPs, including IronMask (CVPR'21) and Mohan et al. (CVPRW'19)
-├── estimator.py                    # Implementation of the proposed security estimator.
-├── benchmark.py                    # Codes for measuring TAR/FAR.
-├── feat_tools.py                   # Utility tools for extracting face features from the benchmark datasets.
-├── 1. Upper TAR.ipynb              # Reproducing our results for the upper bound of TAR from CtH-based BTPs
-└── 2. Estimator.ipynb              # Reproducing our results for the proposed security estimator
+    ├── iresnet.py                      # Forked from https://github.com/deepinsight/insightface    
+    ├── iresnet_magface.py              # Due to compatibility issue; Forked from https://github.com/IrvingMeng/MagFace/blob/main/models/iresnet.py
+    ├── mobilefacenet.py                # Forked from https://github.com/deepinsight/insightface/blob/master/recognition/arcface_torch/backbones/mobilefacenet.py
+    ├── sfnet.py                        # Forked from https://github.com/ydwen/opensphere/blob/main/opensphere/module/backbone/sfnet.py
+    └── vit.py                          # Forked from https://github.com/zhongyy/Face-Transformer/blob/main/copy-to-vit_pytorch-path/vits_face.py
+├── config.py                           # Configs for loading pre-trained FR models.
+├── BTPs.py                             # Implemnetation of face BTPs, including IronMask (CVPR'21) and Mohan et al. (CVPRW'19)
+├── estimator.py                        # Implementation of the proposed security estimator.
+├── benchmark.py                        # Codes for measuring TAR/FAR.
+├── feat_tools.py                       # Utility tools for extracting face features from the benchmark datasets.
+├── 1. Upper TAR.ipynb                  # Reproducing our results for the upper bound of TAR from CtH-based BTPs
+├── 2. Estimator.ipynb                  # Reproducing our results for the proposed security estimator
+└── 3. Toy Parameters.ipynb             # Reproducing our results for the attacking CtH-based BTPs on toy parameters
 ```
 
 #### 1. Reproducing Upper Bounds on TAR
@@ -60,7 +61,7 @@ The codes for loading these backbones are provided inside `backbone`. You can ch
 
 2. You also need to download face benchmark datasets (LFW, CFP-FP, and AgeDB). You can obtain them by downloading them from their official websites or by downloading one of the training datasets provided by InsightFace:
 
-- https://github.com/deepinsight/insightface/tree/master/recognition/_datasets_
+- https://github.com/deepinsight/insightface/tree/master/recognition/\_datasets\_
 
 3. Now you can reproduce our experimental results by following the instructions in `1. Upper TAR.ipynb`.
 
@@ -71,5 +72,10 @@ The codes for loading these backbones are provided inside `backbone`. You can ch
 
 2. You can run our estimator on these BTPs by following the instructions in `2. Estimator.ipynb`.
 
+### 3. Reproducing Validations of Our Attack on Toy Parameters
+
+We also provide the validation of the proposed attack on BTPs with toy parameters. Follow instructions in `3. Toy Parameters.ipynb`.
+
+To reconstruct facial images from the found pre-images, you need the pre-trained modified NbNet parameters, which is provided in the same Google Drive link as above for FR model parameters.
 
 #### Enjoy!
