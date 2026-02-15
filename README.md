@@ -61,7 +61,7 @@ The codes for loading these backbones are provided inside `backbone`. You can ch
 
 2. You also need to download face benchmark datasets (LFW, CFP-FP, and AgeDB). You can obtain them by downloading them from their official websites or by downloading one of the training datasets provided by InsightFace:
 
-- https://github.com/deepinsight/insightface/tree/master/recognition/_datasets\_
+- https://github.com/deepinsight/insightface/tree/master/recognition/_datasets_
 
 3. Now you can reproduce our experimental results by following the instructions in `1. Upper TAR.ipynb`.
 
