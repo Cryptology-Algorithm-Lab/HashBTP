@@ -1,34 +1,23 @@
-# Abstract BTP class
-class BTP:
-    def __init__(self):
-        pass
-    
-    def enroll(self, x):
-        NotImplemented
-    
-    def auth(self, y, t):
-        NotImplemented
-        
-
-# Implementation of [CVPR21] IronMask: Modular Architecture for Protecting Deep Face Template
-# Abstract BTP class
-class BTP:
-    def __init__(self):
-        pass
-    
-    def enroll(self, x):
-        NotImplemented
-    
-    def auth(self, y, t):
-        NotImplemented
-        
-
-# Implementation of [CVPR21] IronMask: Modular Architecture for Protecting Deep Face Template
 import torch
 from torch import nn
 import torch.nn.functional as F
 import math
+import numpy as np
+import galois
 
+# Abstract BTP class
+class BTP:
+    def __init__(self):
+        pass
+    
+    def enroll(self, x):
+        NotImplemented
+    
+    def auth(self, y, t):
+        NotImplemented
+
+       
+# Implementation of [CVPR21] IronMask: Modular Architecture for Protecting Deep Face Template
 @torch.no_grad()
 def ironmask_decode(x, nonzeros):
     _, ind = x.abs().topk(nonzeros)
@@ -94,8 +83,6 @@ class IronMask(BTP):
 
 
 # Implementation of [CVPRW19] Significant Feature Based Representation for Template Protection
-import numpy as np
-import galois
 
 # Table
 # n = 127, k = 64, t = 10
@@ -104,7 +91,6 @@ import galois
 # n = 512, k = 112, t = 59 
 
 def enroll_batch_SF(t, rs, n=255,k=115):
-#     rs = galois.ReedSolomon(n,k)
     GF = rs.field    
     coin = (torch.randn(1) > 0)
     dat1, idx1 = torch.topk(t,n//2+coin, largest = True, sorted = False)
@@ -121,18 +107,16 @@ def enroll_batch_SF(t, rs, n=255,k=115):
 
     return d, c^d, idx[0]
 
-
+@torch.no_grad()
 def auth_batch_SF(t, rs, tmp,n=255,k=115):
-#     rs = galois.ReedSolomon(n,k)
     code, helper, h_i = tmp
-    z = torch.zeros(t.shape)
-    k = torch.topk(t,t.shape[1]//2,1,largest = True)[0][:,-1].reshape(t.shape[0],1)
-    z[torch.where(t>=k)] = 1
-    tmp = z.gather(1,h_i.expand_as(torch.zeros(z.shape[0],n))).to(torch.int16)
-    right = torch.tensor(rs.encode(rs.decode(np.array(tmp^helper))).astype(np.int16))
-    return right
-    
-    
+    z = torch.zeros_like(t)
+    tk = torch.topk(t,t.shape[1]//2,1,largest = True, sorted=False)[0][:,-1].reshape(t.shape[0],1)
+    z[torch.where(t>=tk)] = 1
+    tmp = z.gather(1,h_i.expand(z.shape[0],n)).to(torch.int16)    
+    codet = (tmp^helper)        
+    return ((codet != code).sum(dim=1) <= rs.t)
+        
 class SigFeat(BTP):
     def __init__(self, dim, n,k, mode = "BCH"):
         super().__init__()
@@ -150,7 +134,7 @@ class SigFeat(BTP):
     def enroll(self, x):
         x = F.normalize(x)
         tmp = enroll_batch_SF(x, self.ECC, self.n, self.k)
-        return x, tmp
+        return tmp
             
     def auth(self, x, tmp):
         return auth_batch_SF(x, self.ECC, tmp, self.n, self.k)   
